@@ -37,3 +37,32 @@ bool verif_joueur(int argc , char *argv[]){
     return true;
 
 }
+
+void dico_to_2Darray(char **liste_mots,int nb_mots, ifstream &file){
+    file.clear();
+    file.seekg(0); // on set le curseur au début du fichier pour pouvoir reparcourir le fichier 
+    const int BUFFER_SIZE=256;
+    char buffer[BUFFER_SIZE];
+    int longueur_mot;
+    int count=0;
+    file >> setw(256)>> buffer;
+    while(file){
+        longueur_mot=strlen(buffer);
+        liste_mots[count]= new char[longueur_mot];
+        cout<< liste_mots[count];
+
+        liste_mots[count]=buffer;
+        
+        file >> setw(BUFFER_SIZE) >>buffer;
+        count++;
+    }
+}
+
+void clear_2Darray(char **liste_mots , int nb_mots){
+    for (size_t i = 0; i < nb_mots; i++)
+    {
+        delete [] liste_mots[i];
+    }
+    delete []liste_mots;
+    
+}
